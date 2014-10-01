@@ -58,7 +58,7 @@ public static Connection connection = null;
             for (Map.Entry<String, String> entry : map.entrySet()) {
  
                 
-                r = stmt.executeQuery ("insert into NUMBS values('"+entry.getKey()+"','"+entry.getValue()+"')");
+                r = stmt.executeQuery ("insert into DATA values('"+entry.getValue()+"','"+entry.getKey()+"')");
 			/*System.out.println("Country [code= " + entry.getKey() + " , name="
 				+ entry.getValue() + "]");*/
  
@@ -105,10 +105,10 @@ public static Connection connection = null;
 
     private static Map ParseCSV() throws IOException, SQLException {
 
-        String csvFile = "C:\\libs\\1.csv";
+        String csvFile = "C:\\ParseToParus\\Абразивный инструмент.csv";
         BufferedReader br = null;
         String line = "";
-        String cvsSplitBy = ";";
+        String cvsSplitBy = ",";
         Map<String, String> map = null;
         try {
             map = new HashMap<String, String>();
