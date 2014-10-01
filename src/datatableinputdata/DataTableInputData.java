@@ -54,7 +54,11 @@ public static Connection connection = null;
             if (connection==null) DBConnect();
 
             Statement stmt = connection.createStatement (); 
+            
             ResultSet r = null;
+            
+            r = stmt.executeQuery ("truncate table DATA");
+            
             for (Map.Entry<String, String> entry : map.entrySet()) {
  
                 
@@ -105,10 +109,10 @@ public static Connection connection = null;
 
     private static Map ParseCSV() throws IOException, SQLException {
 
-        String csvFile = "C:\\ParseToParus\\Абразивный инструмент.csv";
+        String csvFile = "C:\\ParseToParus\\Электро, пневмо инструмент и расходные запчасти.csv";
         BufferedReader br = null;
         String line = "";
-        String cvsSplitBy = ",";
+        String cvsSplitBy = ";";
         Map<String, String> map = null;
         try {
             map = new HashMap<String, String>();
@@ -118,6 +122,7 @@ public static Connection connection = null;
 
                 // use comma as separator
                 String[] buf = line.split(cvsSplitBy);
+                if (buf.length<4) continue;
                 if (buf[1].isEmpty() || buf[3].isEmpty()) continue;
                map.put(buf[1].replaceAll("[\\s]{2,}", " "), buf[3].replaceAll(" ", ""));
                /* System.out.println("[" + buf[1].replaceAll("[\\s]{2,}", " ")
